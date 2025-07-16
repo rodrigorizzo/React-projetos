@@ -1,0 +1,65 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  text-align: center;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 8px 16px;
+
+  font-size: 1em;
+  font-weight: 600;
+  font-family: inherit;
+
+  color: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: translate 0.5s;
+}
+button:hover {
+  translate: 0 -3px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px;
+  margin: 40px;
+}
+
+.codigoCor {
+  background-color: #000000;
+
+  width: fit-content;
+  margin: auto;
+  padding: 16px;
+  font-size: 24px;
+  font-weight: 600;
+}
