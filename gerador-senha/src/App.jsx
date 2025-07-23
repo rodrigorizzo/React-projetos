@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 function App() {
   const [senha, setSenha] = useState(0);
@@ -6,21 +6,24 @@ function App() {
   const [numeros, setNumeros] = useState(false);
   const [caracteres, setCaracteres] = useState(false);
 
-  const gerarSenha = () => {
+  const gerarSenha = useCallback(() => {
     let novaSenha = "";
 
-    const stringCaracteres =
-      "AaBbCcDdEeFfGgHhIiJjLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz";
-    const num = "0123456789";
-    const especiais = "@#$%&*!";
+    let str = "AaBbCcDdEeFfGgHhIiJjLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz";
+    if (numeros) str += "0123456789";
+    if (caracteres) str += "@#$%&*!";
 
     for (let i = 0; i < quant; i++) {
-      const index = Math.floor(Math.random() * stringCaracteres.length);
-      novaSenha += stringCaracteres.charAt(index);
+      const index = Math.floor(Math.random() * str.length);
+      novaSenha += str.charAt(index);
     }
 
     setSenha(novaSenha);
-  };
+  }, [quant, numeros, caracteres]);
+
+  useEffect(() => {
+    gerarSenha();
+  }, [quant, numeros, caracteres]);
 
   return (
     <div className="flex flex-col gap-3 w-fit bg-gray-200 p-5 m-auto">
@@ -33,6 +36,7 @@ function App() {
           id=""
           placeholder="senha-aleatoria"
           value={senha}
+          readOnly
         />
         <button
           onClick={gerarSenha}
@@ -43,15 +47,35 @@ function App() {
       </div>
       <div className="flex flex-wrap gap-1">
         <label className="whitespace-nowrap" htmlFor="">
-          <input type="range" name="" id="" min={4} max={16} />
+          <input
+            type="range"
+            name=""
+            id=""
+            value={quant}
+            min={4}
+            max={16}
+            onChange={(e) => setQuant(e.target.value)}
+          />
           {quant}
         </label>
         <label className="whitespace-nowrap">
-          <input className="whitespace-nowrap" type="checkbox" name="" id="" />{" "}
+          <input
+            className="whitespace-nowrap"
+            type="checkbox"
+            onChange={() => setNumeros((anterior) => !anterior)}
+            name=""
+            id=""
+          />{" "}
           Números
         </label>
         <label className="whitespace-nowrap">
-          <input type="checkbox" name="" id="" /> Caracteres especiais
+          <input
+            type="checkbox"
+            onChange={() => setCaracteres((anterior) => !anterior)}
+            name=""
+            id=""
+          />{" "}
+          Caracteres especiais
         </label>
       </div>
     </div>
