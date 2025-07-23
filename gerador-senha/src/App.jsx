@@ -1,10 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 function App() {
   const [senha, setSenha] = useState(0);
   const [quant, setQuant] = useState(10);
   const [numeros, setNumeros] = useState(false);
   const [caracteres, setCaracteres] = useState(false);
+
+  let senhaRef = useRef(null);
 
   const gerarSenha = useCallback(() => {
     let novaSenha = "";
@@ -21,6 +23,11 @@ function App() {
     setSenha(novaSenha);
   }, [quant, numeros, caracteres]);
 
+  const copiarSenha = () => {
+    window.navigator.clipboard.writeText(senha);
+    senhaRef.current?.select();
+  }
+
   useEffect(() => {
     gerarSenha();
   }, [quant, numeros, caracteres]);
@@ -36,10 +43,11 @@ function App() {
           id=""
           placeholder="senha-aleatoria"
           value={senha}
+          ref={senhaRef}
           readOnly
         />
         <button
-          onClick={gerarSenha}
+          onClick={copiarSenha}
           className="bg-blue-900 text-white inline-block p-2"
         >
           copiar
