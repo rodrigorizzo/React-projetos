@@ -26,18 +26,18 @@ function App() {
   const copiarSenha = () => {
     window.navigator.clipboard.writeText(senha);
     senhaRef.current?.select();
-  }
+  };
 
   useEffect(() => {
     gerarSenha();
   }, [quant, numeros, caracteres]);
 
   return (
-    <div className="flex flex-col gap-3 w-fit bg-gray-200 p-5 m-auto">
-      <h1 className="text-3xl text-center font-bold">Gerador de Senhas</h1>
-      <div className="">
+    <div className="flex flex-col gap-12 w-fit  bg-indigo-800 p-5 rounded">
+      <h1 className="text-white text-4xl text-center font-extrabold">Gerador de Senhas</h1>
+      <div className="flex rounded overflow-hidden">
         <input
-          className="bg-blue-200 inline-block p-2"
+          className="bg-white border border-gray-200 inline-block p-2 flex-grow"
           type="text"
           name=""
           id=""
@@ -48,25 +48,25 @@ function App() {
         />
         <button
           onClick={copiarSenha}
-          className="bg-blue-900 text-white inline-block p-2"
+          className="bg-gray-500 text-white inline-block p-2 cursor-pointer"
         >
           copiar
         </button>
       </div>
-      <div className="flex flex-wrap gap-1">
-        <label className="whitespace-nowrap" htmlFor="">
-          <input
-            type="range"
-            name=""
-            id=""
-            value={quant}
-            min={4}
-            max={16}
-            onChange={(e) => setQuant(e.target.value)}
-          />
-          {quant}
-        </label>
-        <label className="whitespace-nowrap">
+      <div className="flex flex-wrap gap-3">
+        <input
+          className="cursor-pointer"
+          type="range"
+          name=""
+          id=""
+          value={quant}
+          min={4}
+          max={16}
+          onChange={(e) => setQuant(e.target.value)}
+          title={`Tamanho da senha: ${quant}`}
+        />
+        <label className="whitespace-nowrap" htmlFor=""></label>
+        <label className="whitespace-nowrap cursor-pointer">
           <input
             className="whitespace-nowrap"
             type="checkbox"
@@ -76,7 +76,7 @@ function App() {
           />{" "}
           Números
         </label>
-        <label className="whitespace-nowrap">
+        <label className="whitespace-nowrap cursor-pointer">
           <input
             type="checkbox"
             onChange={() => setCaracteres((anterior) => !anterior)}
